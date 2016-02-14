@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="com/streams/news/EmitNews.java|com/ramine/viewer/graph/|com/ramine/viewer/graph/object/|com/ramine/viewer/metrics/|com/ramine/viewer/timeseries/|com/ramine/ui/|com/ramine/processor/" kind="src" path="src"/>
+	<classpathentry kind="lib" path="lib/pircbotx-2.0.1.jar"/>
+	<classpathentry kind="lib" path="jar/gson-2.3.jar"/>
+	<classpathentry kind="lib" path="C:/JUNG/collections-generic-4.01.jar"/>
+	<classpathentry kind="lib" path="C:/JUNG/colt-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/JUNG/concurrent-1.3.4.jar"/>
+	<classpathentry kind="lib" path="C:/JUNG/j3d-core-1.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/JUNG/jung-3d-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/JUNG/jung-3d-demos-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/JUNG/jung-algorithms-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/JUNG/jung-api-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/JUNG/jung-graph-impl-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/JUNG/jung-io-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/JUNG/jung-jai-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/JUNG/jung-jai-samples-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/JUNG/jung-samples-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/JUNG/jung-visualization-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/JUNG/stax-api-1.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/JUNG/vecmath-1.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/JUNG/wstx-asl-3.2.6.jar"/>
+	<classpathentry kind="lib" path="lib/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/extfx-0.3.jar"/>
+	<classpathentry kind="lib" path="lib/j-calais-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/guava-18.0.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-core-2.5.0-20141003.015637-10.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-jaxrs-json-provider-2.4.3.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-jaxrs-base-2.4.0-rc3.jar"/>
+	<classpathentry kind="lib" path="jar/rabbitMQExample.jar"/>
+	<classpathentry kind="lib" path="lib/mongo-java-driver-2.12.2.jar"/>
+	<classpathentry kind="lib" path="lib/guardianAPI.jar"/>
+	<classpathentry kind="lib" path="lib/ezmorph-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/org.apache.commons.collections.jar"/>
+	<classpathentry kind="lib" path="lib/commons-beanutils-1.9.2.jar"/>
+	<classpathentry kind="var" path="JRE_LIB"/>
+	<classpathentry kind="lib" path="lib/apache-commons-lang.jar"/>
+	<classpathentry kind="lib" path="lib/picocontainer-2.11-20100223.042317-1.jar"/>
+	<classpathentry kind="lib" path="lib/joda-time-2.5.jar"/>
+	<classpathentry kind="lib" path="lib/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="jar/jsoup-1.8.3.jar"/>
+	<classpathentry kind="lib" path="lib/rabbitMQ_TwitterEmitter_US.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
