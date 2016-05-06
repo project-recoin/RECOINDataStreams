@@ -34,16 +34,39 @@ import com.streams.wikipedia.WikipediaIRCConnect;
 
 public class RECOINEmitter {
 
-	private static final String EXCHANGE_NAME = "twitter_RECOIN";
+	private static String EXCHANGE_NAME = "twitter_RECOIN";
+	private static String rabbitHost = "";
+	private static String rabbitUsername = "";
+	private static String rabbitPassword = "";
+
 	private static final int MYTHREADS = 30;
 
 	public static void main(String[] argv) throws Exception {
 
 		// first let's load some different keys
 		HashMap<String, TwitterCredentials> apiCredentials = new HashMap<>();
-		JSONArray config_file = new JSONArray();
 
-		config_file = loadKeys();
+
+		try{
+			JSONArray tmp = new JSONArray();
+			tmp = loadKeys("config/harvester_config.json");
+			JSONObject harvester_config = tmp.getJSONObject(0);
+			EXCHANGE_NAME = harvester_config.getString("rabbitMQExchangeName");
+			rabbitHost = harvester_config.getString("rabbitMQHost");
+			rabbitUsername = harvester_config.getString("rabbitMQUsername");
+			rabbitPassword = harvester_config.getString("rabbitMQPassword");
+			System.out.printf("Harvester Config Loaded! Wee'll be using %s as the rabbmitMQ exchage. Get ready, things are about to get wild.\n", EXCHANGE_NAME);
+		}catch(Exception e){
+			System.err.print("looks like your harvester_config.json couldnt be found... have you got a config folder? Have you had enough coffee?");
+			System.exit(1);
+		}
+
+
+		
+		
+		
+		JSONArray config_file = new JSONArray();		
+		config_file = loadKeys("config/twitter_config.json");
 		if (config_file.size() > 0) {
 			System.out.println("Twitter API keys successfully loaded");
 			apiCredentials = loadCredentials(config_file, apiCredentials);
@@ -53,6 +76,10 @@ public class RECOINEmitter {
 					"Opps, Looks like there's an error loading the keys, go check your config file and try again");
 			System.exit(1);
 		}
+		
+		System.setProperty("twitter4j.jsonStoreEnabled", "true");
+
+		
 
 		ArrayList<GetTweetsRECOIN> tweetHarvesters = new ArrayList<GetTweetsRECOIN>();
 
@@ -66,9 +93,9 @@ public class RECOINEmitter {
 
 		ExecutorService executor = Executors.newFixedThreadPool(MYTHREADS);
 		ConnectionFactory factory = new ConnectionFactory();
-		factory.setHost("localhost");
-		factory.setUsername("guest");
-		factory.setPassword("sociam2015");
+		factory.setHost(rabbitHost);
+//		factory.setUsername(rabbitUsername);
+//		factory.setPassword(rabbitPassword);
 		Connection connection = factory.newConnection();
 		Channel channel = connection.createChannel();
 		channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
@@ -119,29 +146,26 @@ public class RECOINEmitter {
 		return apiCredentials;
 	}
 
-	private static JSONArray loadKeys() {
+	private static JSONArray loadKeys(String configFilepath) {
 
 		try {
-			JSONArray apiKeys2 = new JSONArray();
-			File f = new File("config/twitter_config.json");
+			JSONArray jsonKeys = new JSONArray();
+			File f = new File(configFilepath);
 			if (f.exists()) {
-				InputStream is = new FileInputStream("config/twitter_config.json");
+				InputStream is = new FileInputStream(configFilepath);
 				String jsonTxt = IOUtils.toString(is);
-				apiKeys2 = (JSONArray) JSONSerializer.toJSON(jsonTxt.toString());
-				// System.out.println(jsonTxt);
-				// JSONObject json = new JSONObject();
-				// json.put("api", data);
-				//// JSONObject json = new JSONObject(jsonTxt);
-				// JSONArray a = json.getJSONArray("api");
-				// System.out.println(a.get(0));
+				jsonKeys = (JSONArray) JSONSerializer.toJSON(jsonTxt.toString());
+				
 			}
-			return apiKeys2;
+			return jsonKeys;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new JSONArray();
 		}
 
 	}
+	
+	
 
 
 	private static String joinStrings(String[] strings, String delimiter) {
