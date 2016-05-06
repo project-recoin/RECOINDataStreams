@@ -17,6 +17,7 @@ import twitter4j.StatusDeletionNotice;
 import twitter4j.StatusListener;
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
+import twitter4j.TwitterObjectFactory;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 import twitter4j.conf.ConfigurationBuilder;
@@ -177,6 +178,17 @@ public class GetTweetsRECOIN {
 				tweetObj.put("retweet_tweet", retweetObj);
 
 			}
+
+			try{
+				for(int x=0; x < status.getURLEntities().length; x++){
+					tweetUrls.put(status.getURLEntities()[x].getURL());
+				}
+			}catch(Exception e){
+				
+			}
+			
+			tweetObj.put("urls", tweetUrls);
+
 			for (int i = 0; i < status.getUserMentionEntities().length; i++) {
 				mentions.put(status.getUserMentionEntities()[i].getText());
 			}
@@ -196,7 +208,12 @@ public class GetTweetsRECOIN {
 			for (int i = 0; i < status.getURLEntities().length; i++) {
 				tweetUrls.put(status.getURLEntities()[i].getURL());
 			}
-			tweetObj.put("urls", tweetUrls);
+			try{
+				String rawJson = TwitterObjectFactory.getRawJSON(status);
+				tweetObj.put("status_raw", rawJson);
+			}catch(Exception e){
+				
+			}
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -143,11 +143,6 @@ public class RECOINEmitter {
 
 	}
 
-	private static String getMessage(String[] strings) {
-		if (strings.length < 1)
-			return "info: Hello World!";
-		return joinStrings(strings, " ");
-	}
 
 	private static String joinStrings(String[] strings, String delimiter) {
 		int length = strings.length;
